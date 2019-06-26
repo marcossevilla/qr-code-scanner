@@ -15,6 +15,7 @@ class MyApp extends StatelessWidget {
       },
       theme: ThemeData(
         primaryColor: Colors.amber[900],
+        fontFamily: 'OpenSans',
       ),
     );
   }
