@@ -65,18 +65,21 @@ class _HomePageState extends State<HomePage> {
   }
 
   _scanQR() async {
+    // test values
+    // geo:40.782490097914604,-73.97160902460939
+
     String futureString = '';
 
-    try {
-      futureString = await QRCodeReader().scan();
-    } catch (e) {
-      futureString = e.toString();
-    }
+    // try {
+    //   futureString = await QRCodeReader().scan();
+    // } catch (e) {
+    //   futureString = e.toString();
+    // }
 
-    print('futureString: $futureString');
+    // print('futureString: $futureString');
 
-    if (futureString != null) {
-      print('there\'s info');
-    }
+    // if (futureString != null) {
+    //   print('there\'s info');
+    // }
   }
 }
