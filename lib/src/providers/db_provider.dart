@@ -13,6 +13,10 @@ class DBProvider {
   // this is a private constructor for DBProvider
   DBProvider._();
 
+  /*
+    db config methods
+  */
+
   Future<Database> get database async {
     if (_database != null) return _database;
 
@@ -40,6 +44,12 @@ class DBProvider {
     });
   }
 
+  /*
+    Insert to db methods
+  */
+
+  /* Scan object */
+
   // the raw way, don't use
   newRawScan(ScanModel newScan) async {
     final db = await database;
@@ -55,7 +65,47 @@ class DBProvider {
   // more secure way, use this one, it's cleaner
   newScan(ScanModel newScan) async {
     final db = await database;
-    final res = db.insert('Scans', newScan.toJson());
+    final res = await db.insert('Scans', newScan.toJson());
     return res;
+  }
+
+  /*
+    Select from db methods
+  */
+
+  // select specific register from Scans table
+  Future<ScanModel> getScanId(int id) async {
+    final db = await database;
+    final res = await db.query(
+      'Scans',
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+
+    return res.isNotEmpty ? ScanModel.fromJson(res.first) : null;
+  }
+
+  // select all registers from Scans table
+  Future<List<ScanModel>> getAllScans() async {
+    final db = await database;
+    final res = await db.query('Scans');
+
+    List<ScanModel> list = res.isNotEmpty
+        ? res.map((scan) => ScanModel.fromJson(scan)).toList()
+        : [];
+
+    return list;
+  }
+
+  // select registers with {type} filter
+  Future<List<ScanModel>> getScansByType(String type) async {
+    final db = await database;
+    final res = await db.rawQuery("select * from Scans where type='$type'");
+
+    List<ScanModel> list = res.isNotEmpty
+        ? res.map((scan) => ScanModel.fromJson(scan)).toList()
+        : [];
+
+    return list;
   }
 }
