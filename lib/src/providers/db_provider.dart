@@ -11,11 +11,11 @@ class DBProvider {
   static Database _database;
   static final DBProvider db = DBProvider._();
 
-  // this is a private constructor for DBProvider
+  //* this is a private constructor for DBProvider
   DBProvider._();
 
   /*
-    db config methods
+  *   db config methods
   */
 
   Future<Database> get database async {
@@ -46,12 +46,12 @@ class DBProvider {
   }
 
   /*
-    insert to db methods
+  *   insert to db methods
   */
 
-  /* scan object */
+  //* scan object
 
-  // the raw way, don't use
+  //* the raw way, don't use
   newRawScan(ScanModel newScan) async {
     final db = await database;
 
@@ -63,7 +63,7 @@ class DBProvider {
     return res;
   }
 
-  // more secure way, use this one, it's cleaner
+  //* more secure way, use this one, it's cleaner
   newScan(ScanModel newScan) async {
     final db = await database;
     final res = await db.insert('Scans', newScan.toJson());
@@ -71,10 +71,10 @@ class DBProvider {
   }
 
   /*
-    select from db methods
+  *   select from db methods
   */
 
-  // select specific register from Scans table
+  //* select specific register from Scans table
   Future<ScanModel> getScanId(int id) async {
     final db = await database;
     final res = await db.query(
@@ -86,7 +86,7 @@ class DBProvider {
     return res.isNotEmpty ? ScanModel.fromJson(res.first) : null;
   }
 
-  // select all registers from Scans table
+  //* select all registers from Scans table
   Future<List<ScanModel>> getAllScans() async {
     final db = await database;
     final res = await db.query('Scans');
@@ -98,7 +98,7 @@ class DBProvider {
     return list;
   }
 
-  // select registers with {type} filter
+  //* select registers with {type} filter
   Future<List<ScanModel>> getScansByType(String type) async {
     final db = await database;
     final res = await db.rawQuery("select * from Scans where type='$type'");
@@ -111,12 +111,12 @@ class DBProvider {
   }
 
   /*
-    update to db methods
+  *   update to db methods
   */
 
-  /* scan object */
+  //* scan object
 
-  // specific scan update
+  //* specific scan update
   Future<int> updateScan(ScanModel newScan) async {
     final db = await database;
     final res = await db.update(
@@ -129,20 +129,20 @@ class DBProvider {
   }
 
   /*
-    delete to db methods
+  *   delete to db methods
   */
 
-  /* scan object */
+  //* scan object
 
-  // specific scan delete
+  //* specific scan delete
   Future<int> deleteScan(int id) async {
     final db = await database;
     final res = await db.delete('Scans', where: 'id = ?', whereArgs: [id]);
     return res;
   }
 
-  // all registers
-  Future<int> deleteAll(int id) async {
+  //* all registers
+  Future<int> deleteAll() async {
     final db = await database;
     final res = await db.rawDelete('delete from Scans');
     return res;
