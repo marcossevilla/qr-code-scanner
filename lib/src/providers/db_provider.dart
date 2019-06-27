@@ -1,3 +1,5 @@
+import 'package:qr_code_scanner/src/models/scan_model.dart';
+
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
@@ -36,5 +38,24 @@ class DBProvider {
         ')',
       );
     });
+  }
+
+  // the raw way, don't use
+  newRawScan(ScanModel newScan) async {
+    final db = await database;
+
+    final res = await db.rawInsert(
+      "insert into Scans (id, type, value) "
+      "values ( ${newScan.id}, '${newScan.type}', '${newScan.value}' )",
+    );
+
+    return res;
+  }
+
+  // more secure way, use this one, it's cleaner
+  newScan(ScanModel newScan) async {
+    final db = await database;
+    final res = db.insert('Scans', newScan.toJson());
+    return res;
   }
 }
