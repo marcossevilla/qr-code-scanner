@@ -16,6 +16,18 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.greenAccent[700],
         fontFamily: 'OpenSans',
+        textTheme: TextTheme(
+          title: TextStyle(
+            fontSize: 20.0,
+            fontWeight: FontWeight.normal,
+            fontFamily: 'OpenSans',
+          ),
+          body1: TextStyle(
+            fontSize: 15.0,
+            fontWeight: FontWeight.normal,
+            fontFamily: 'OpenSans',
+          ),
+        ),
       ),
     );
   }

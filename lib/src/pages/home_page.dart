@@ -19,7 +19,10 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('QR Code Scanner'),
+        title: Text(
+          'QR Code Scanner',
+          style: Theme.of(context).textTheme.title,
+        ),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.delete_outline),
@@ -67,16 +70,16 @@ class _HomePageState extends State<HomePage> {
   }
 
   _scanQR() async {
-    // test values
+    // some test values
     // geo:40.782490097914604,-73.97160902460939
 
-    String futureString = 'https://google.com';
+    String futureString = '';
 
-    // try {
-    //   futureString = await QRCodeReader().scan();
-    // } catch (e) {
-    //   futureString = e.toString();
-    // }
+    try {
+      futureString = await QRCodeReader().scan();
+    } catch (e) {
+      futureString = e.toString();
+    }
 
     // print('futureString: $futureString');
 
