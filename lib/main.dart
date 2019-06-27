@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
         'home': (BuildContext context) => HomePage(),
       },
       theme: ThemeData(
-        primaryColor: Colors.amber[900],
+        primaryColor: Colors.greenAccent[700],
         fontFamily: 'OpenSans',
       ),
     );

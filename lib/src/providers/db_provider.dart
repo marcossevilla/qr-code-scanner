@@ -1,8 +1,9 @@
 import 'package:qr_code_scanner/src/models/scan_model.dart';
+export 'package:qr_code_scanner/src/models/scan_model.dart';
 
 import 'package:path/path.dart';
-import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:sqflite/sqflite.dart';
 
 import 'dart:io';
 
