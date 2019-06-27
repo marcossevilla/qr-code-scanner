@@ -24,15 +24,25 @@ class MapsPage extends StatelessWidget {
 
         return ListView.builder(
           itemCount: scans.length,
-          itemBuilder: (context, index) => ListTile(
-                leading: (Icon(
-                  Icons.cloud,
-                  color: Theme.of(context).primaryColor,
-                )),
-                title: Text(scans[index].value),
-                trailing: Icon(
-                  Icons.keyboard_arrow_right,
-                  color: Colors.grey,
+          itemBuilder: (context, index) => Dismissible(
+                key: UniqueKey(),
+                background: Container(
+                  child: Icon(Icons.delete, color: Colors.white),
+                  color: Colors.red,
+                ),
+                onDismissed: (direction) {
+                  DBProvider.db.deleteScan(scans[index].id);
+                },
+                child: ListTile(
+                  leading: Icon(
+                    Icons.cloud,
+                    color: Theme.of(context).primaryColor,
+                  ),
+                  title: Text(scans[index].value),
+                  trailing: Icon(
+                    Icons.keyboard_arrow_right,
+                    color: Colors.grey,
+                  ),
                 ),
               ),
         );
