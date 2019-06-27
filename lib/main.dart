@@ -7,7 +7,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // debugShowCheckedModeBanner: false,git push -u origin master
+      debugShowCheckedModeBanner: false,
       title: 'QR Code Scanner',
       initialRoute: 'home',
       routes: {

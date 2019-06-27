@@ -45,10 +45,10 @@ class DBProvider {
   }
 
   /*
-    Insert to db methods
+    insert to db methods
   */
 
-  /* Scan object */
+  /* scan object */
 
   // the raw way, don't use
   newRawScan(ScanModel newScan) async {
@@ -70,7 +70,7 @@ class DBProvider {
   }
 
   /*
-    Select from db methods
+    select from db methods
   */
 
   // select specific register from Scans table
@@ -107,5 +107,43 @@ class DBProvider {
         : [];
 
     return list;
+  }
+
+  /*
+    update to db methods
+  */
+
+  /* scan object */
+
+  // specific scan update
+  Future<int> updateScan(ScanModel newScan) async {
+    final db = await database;
+    final res = await db.update(
+      'Scans',
+      newScan.toJson(),
+      where: 'id = ?',
+      whereArgs: [newScan.id],
+    );
+    return res;
+  }
+
+  /*
+    delete to db methods
+  */
+
+  /* scan object */
+
+  // specific scan delete
+  Future<int> deleteScan(int id) async {
+    final db = await database;
+    final res = await db.delete('Scans', where: 'id = ?', whereArgs: [id]);
+    return res;
+  }
+
+  // all registers
+  Future<int> deleteAll(int id) async {
+    final db = await database;
+    final res = await db.rawDelete('delete from Scans');
+    return res;
   }
 }
