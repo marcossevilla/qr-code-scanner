@@ -1,18 +1,25 @@
-import 'dart:io';
+import 'package:qr_code_scanner/src/bloc/scan_bloc.dart';
+import 'package:qr_code_scanner/src/models/scan_model.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:qr_code_scanner/src/providers/db_provider.dart';
+
+import 'dart:io';
 
 class MapsPage extends StatelessWidget {
+  final scanBloc = new ScanBloc();
+
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<ScanModel>>(
-      future: DBProvider.db.getAllScans(),
+    return StreamBuilder<List<ScanModel>>(
+      stream: scanBloc.scanStream,
       builder: (BuildContext context, AsyncSnapshot<List<ScanModel>> snapshot) {
         if (!snapshot.hasData) {
           return Platform.isAndroid
-              ? Center(child: CircularProgressIndicator())
+              ? Center(
+                  child: CircularProgressIndicator(
+                  backgroundColor: Colors.green,
+                ))
               : Center(child: CupertinoActivityIndicator());
         }
 
@@ -30,9 +37,8 @@ class MapsPage extends StatelessWidget {
                   child: Icon(Icons.delete, color: Colors.white),
                   color: Colors.red,
                 ),
-                onDismissed: (direction) {
-                  DBProvider.db.deleteScan(scans[index].id);
-                },
+                onDismissed: (direction) =>
+                    scanBloc.deleteScan(scans[index].id),
                 child: ListTile(
                   leading: Icon(
                     Icons.cloud,

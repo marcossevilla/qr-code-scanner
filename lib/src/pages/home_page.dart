@@ -1,7 +1,7 @@
+import 'package:qr_code_scanner/src/bloc/scan_bloc.dart';
+import 'package:qr_code_scanner/src/models/scan_model.dart';
 import 'package:qr_code_scanner/src/pages/directions_page.dart';
 import 'package:qr_code_scanner/src/pages/maps_page.dart';
-
-import 'package:qr_code_scanner/src/providers/db_provider.dart';
 
 import 'package:qrcode_reader/qrcode_reader.dart';
 
@@ -13,6 +13,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final scanBloc = new ScanBloc();
+
   int currentIndex = 0;
 
   @override
@@ -25,8 +27,11 @@ class _HomePageState extends State<HomePage> {
         ),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.delete_outline),
-            onPressed: () {},
+            icon: Icon(
+              Icons.delete_outline,
+              color: Colors.white,
+            ),
+            onPressed: scanBloc.deleteAll,
           ),
         ],
       ),
@@ -73,19 +78,19 @@ class _HomePageState extends State<HomePage> {
     // some test values
     // geo:40.782490097914604,-73.97160902460939
 
-    String futureString = '';
+    String futureString = 'https//:google.com';
 
-    try {
-      futureString = await QRCodeReader().scan();
-    } catch (e) {
-      futureString = e.toString();
-    }
+    // try {
+    //   futureString = await QRCodeReader().scan();
+    // } catch (e) {
+    //   futureString = e.toString();
+    // }
 
-    // print('futureString: $futureString');
+    print('futureString: $futureString');
 
     if (futureString != null) {
       final scan = ScanModel(value: futureString);
-      DBProvider.db.newScan(scan);
+      scanBloc.addScan(scan);
     }
   }
 }
