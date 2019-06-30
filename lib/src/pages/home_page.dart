@@ -3,6 +3,8 @@ import 'package:qr_code_scanner/src/models/scan_model.dart';
 import 'package:qr_code_scanner/src/pages/directions_page.dart';
 import 'package:qr_code_scanner/src/pages/maps_page.dart';
 
+import 'package:qr_code_scanner/src/utils/utils.dart' as utils;
+
 import 'package:qrcode_reader/qrcode_reader.dart';
 
 import 'package:flutter/material.dart';
@@ -78,7 +80,7 @@ class _HomePageState extends State<HomePage> {
     // some test values
     // geo:40.782490097914604,-73.97160902460939
 
-    String futureString = 'https//:google.com';
+    String futureString = 'https://google.com';
 
     // try {
     //   futureString = await QRCodeReader().scan();
@@ -91,6 +93,11 @@ class _HomePageState extends State<HomePage> {
     if (futureString != null) {
       final scan = ScanModel(value: futureString);
       scanBloc.addScan(scan);
+
+      final scan2 = ScanModel(
+        value: 'geo:40.71174275262298,-73.99358168085939',
+      );
+      scanBloc.addScan(scan2);
     }
   }
 }

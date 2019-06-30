@@ -1,6 +1,8 @@
 import 'package:qr_code_scanner/src/bloc/scan_bloc.dart';
 import 'package:qr_code_scanner/src/models/scan_model.dart';
 
+import 'package:qr_code_scanner/src/utils/utils.dart' as utils;
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -49,6 +51,7 @@ class MapsPage extends StatelessWidget {
                     Icons.keyboard_arrow_right,
                     color: Colors.grey,
                   ),
+                  onTap: () => utils.launchScan(context, scans[index]),
                 ),
               ),
         );
