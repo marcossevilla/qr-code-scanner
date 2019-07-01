@@ -3,6 +3,8 @@
 // To parse this JSON data, do
 //     final scanModel = scanModelFromJson(jsonString);
 
+import 'package:latlong/latlong.dart';
+
 class ScanModel {
   int id;
   String type;
@@ -31,4 +33,12 @@ class ScanModel {
         "type": type,
         "value": value,
       };
+
+  getLatLng() {
+    final latlng = value.substring(4).split(',');
+    final lat = double.parse(latlng[0]);
+    final lng = double.parse(latlng[1]);
+
+    return LatLng(lat, lng);
+  }
 }

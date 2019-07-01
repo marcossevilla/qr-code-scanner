@@ -21,6 +21,7 @@ class MapsPage extends StatelessWidget {
               ? Center(
                   child: CircularProgressIndicator(
                   backgroundColor: Colors.green,
+                  valueColor: AlwaysStoppedAnimation<Color>(Colors.green[800]),
                 ))
               : Center(child: CupertinoActivityIndicator());
         }

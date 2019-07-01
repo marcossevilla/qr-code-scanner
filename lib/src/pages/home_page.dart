@@ -31,7 +31,7 @@ class _HomePageState extends State<HomePage> {
           IconButton(
             icon: Icon(
               Icons.delete_outline,
-              color: Colors.white,
+              color: Colors.black,
             ),
             onPressed: scanBloc.deleteAll,
           ),

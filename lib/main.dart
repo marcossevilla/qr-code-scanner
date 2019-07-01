@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
             fontSize: 20.0,
             fontWeight: FontWeight.normal,
             fontFamily: 'OpenSans',
-            color: Colors.white,
+            color: Colors.black,
           ),
           body1: TextStyle(
             fontSize: 15.0,
