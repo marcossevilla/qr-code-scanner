@@ -4,12 +4,20 @@ import 'package:flutter_map/flutter_map.dart';
 
 import 'package:flutter/material.dart';
 
-class ViewMapPage extends StatelessWidget {
+class ViewMapPage extends StatefulWidget {
+  @override
+  _ViewMapPageState createState() => _ViewMapPageState();
+}
+
+class _ViewMapPageState extends State<ViewMapPage> {
   final map = new MapController();
+
+  String mapId = 'dark';
 
   @override
   Widget build(BuildContext context) {
     final ScanModel scan = ModalRoute.of(context).settings.arguments;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -24,6 +32,7 @@ class ViewMapPage extends StatelessWidget {
         ],
       ),
       body: _createFlutterMap(scan),
+      floatingActionButton: _createFAB(context),
     );
   }
 
@@ -48,7 +57,7 @@ class ViewMapPage extends StatelessWidget {
       additionalOptions: {
         'accessToken':
             'pk.eyJ1IjoibWFyY29zc2V2aWxsYSIsImEiOiJjanhqNnoyOGUwMG9hM25xZnIxdXY3ajlhIn0.lT8_4zgaY4FiOY2CiwfuQw',
-        'id': 'mapbox.dark',
+        'id': 'mapbox.$mapId',
         // other id types: dark, light, outdoors, satellite
       },
     );
@@ -69,5 +78,27 @@ class ViewMapPage extends StatelessWidget {
             ),
       ),
     ]);
+  }
+
+  _createFAB(BuildContext context) {
+    return FloatingActionButton(
+      onPressed: () {
+        if (mapId == 'dark') {
+          mapId = 'light';
+        } else if (mapId == 'light') {
+          mapId = 'outdoors';
+        } else if (mapId == 'outdoors') {
+          mapId = 'satellite';
+        } else if (mapId == 'satellite') {
+          mapId = 'streets';
+        } else if (mapId == 'streets') {
+          mapId = 'dark';
+        }
+
+        setState(() {});
+      },
+      child: Icon(Icons.refresh),
+      backgroundColor: Theme.of(context).primaryColor,
+    );
   }
 }
