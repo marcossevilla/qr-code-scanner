@@ -1,15 +1,15 @@
 import 'package:qr_code_scanner/src/models/scan_model.dart';
 
-import 'package:latlong/latlong.dart';
-
 import 'package:flutter_map/flutter_map.dart';
 
 import 'package:flutter/material.dart';
 
 class ViewMapPage extends StatelessWidget {
+  final map = new MapController();
+
   @override
   Widget build(BuildContext context) {
-    final ScanModel scanModel = ModalRoute.of(context).settings.arguments;
+    final ScanModel scan = ModalRoute.of(context).settings.arguments;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -19,16 +19,17 @@ class ViewMapPage extends StatelessWidget {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.location_on),
-            onPressed: () {},
+            onPressed: () => map.move(scan.getLatLng(), 15.0),
           ),
         ],
       ),
-      body: _createFlutterMap(scanModel),
+      body: _createFlutterMap(scan),
     );
   }
 
   Widget _createFlutterMap(ScanModel scan) {
     return FlutterMap(
+      mapController: map,
       options: MapOptions(
         center: scan.getLatLng(),
         zoom: 15.0,
