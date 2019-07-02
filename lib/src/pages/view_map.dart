@@ -31,10 +31,11 @@ class ViewMapPage extends StatelessWidget {
     return FlutterMap(
       options: MapOptions(
         center: scan.getLatLng(),
-        zoom: 10.0,
+        zoom: 15.0,
       ),
       layers: [
         _createMap(),
+        _createMarkers(scan),
       ],
     );
   }
@@ -46,8 +47,26 @@ class ViewMapPage extends StatelessWidget {
       additionalOptions: {
         'accessToken':
             'pk.eyJ1IjoibWFyY29zc2V2aWxsYSIsImEiOiJjanhqNnoyOGUwMG9hM25xZnIxdXY3ajlhIn0.lT8_4zgaY4FiOY2CiwfuQw',
-        'id': 'mapbox.streets',
+        'id': 'mapbox.dark',
+        // other id types: dark, light, outdoors, satellite
       },
     );
+  }
+
+  _createMarkers(ScanModel scan) {
+    return MarkerLayerOptions(markers: <Marker>[
+      Marker(
+        width: 100.0,
+        height: 100.0,
+        point: scan.getLatLng(),
+        builder: (BuildContext context) => Container(
+              child: Icon(
+                Icons.location_on,
+                size: 45.0,
+                color: Theme.of(context).primaryColor,
+              ),
+            ),
+      ),
+    ]);
   }
 }

@@ -5,8 +5,6 @@ import 'package:qr_code_scanner/src/pages/maps_page.dart';
 
 import 'package:qr_code_scanner/src/utils/utils.dart' as utils;
 
-import 'package:qrcode_reader/qrcode_reader.dart';
-
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
