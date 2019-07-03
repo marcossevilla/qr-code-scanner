@@ -13,6 +13,8 @@ class MapsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    scanBloc.getScans();
+
     return StreamBuilder<List<ScanModel>>(
       stream: scanBloc.scanStream,
       builder: (BuildContext context, AsyncSnapshot<List<ScanModel>> snapshot) {

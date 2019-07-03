@@ -3,8 +3,6 @@ import 'package:qr_code_scanner/src/models/scan_model.dart';
 import 'package:qr_code_scanner/src/pages/directions_page.dart';
 import 'package:qr_code_scanner/src/pages/maps_page.dart';
 
-import 'package:qr_code_scanner/src/utils/utils.dart' as utils;
-
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -39,7 +37,10 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: _createBottomNavBar(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.filter_center_focus),
+        child: Icon(
+          Icons.filter_center_focus,
+          color: Colors.black,
+        ),
         onPressed: _scanQR,
         backgroundColor: Theme.of(context).primaryColor,
       ),
@@ -75,8 +76,8 @@ class _HomePageState extends State<HomePage> {
   }
 
   _scanQR() async {
-    // some test values
-    // geo:40.782490097914604,-73.97160902460939
+    // * some test values
+    // * geo:40.782490097914604,-73.97160902460939
 
     String futureString = 'https://google.com';
 
