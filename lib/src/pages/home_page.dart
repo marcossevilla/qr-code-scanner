@@ -68,7 +68,7 @@ class _HomePageState extends State<HomePage> {
           title: Text('Maps'),
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.zoom_out_map),
+          icon: Icon(Icons.cloud_queue),
           title: Text('Directions'),
         ),
       ],

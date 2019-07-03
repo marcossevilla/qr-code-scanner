@@ -23,7 +23,7 @@ class MapsPage extends StatelessWidget {
               ? Center(
                   child: CircularProgressIndicator(
                   backgroundColor: Colors.green,
-                  valueColor: AlwaysStoppedAnimation<Color>(Colors.green[800]),
+                  valueColor: AlwaysStoppedAnimation(Colors.green[800]),
                 ))
               : Center(child: CupertinoActivityIndicator());
         }
@@ -46,7 +46,7 @@ class MapsPage extends StatelessWidget {
                     scanBloc.deleteScan(scans[index].id),
                 child: ListTile(
                   leading: Icon(
-                    Icons.cloud,
+                    Icons.zoom_out_map,
                     color: Theme.of(context).primaryColor,
                   ),
                   title: Text(scans[index].value),
